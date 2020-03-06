@@ -41,7 +41,7 @@ render(){
         <div class="column">
         <div class="ui card">
           <div class="image">
-            <img src="https://i.pinimg.com/originals/3d/8c/69/3d8c69d70d570b054651b6d2f44a02d3.png" />
+            <img src="https://vandal-us.s3.amazonaws.com/spree/products/46698/print/open-uri20181203-14-pqacts.jpg" />
           </div>
           <div class="content">
             <div class="header"> {this.props.nome} </div>

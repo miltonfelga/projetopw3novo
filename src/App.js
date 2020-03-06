@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <>
         <div class="ui menu inverted">
-          <h2 class="ui header item">Jinder</h2>
+          <h2 class="ui header item">Milton</h2>
           <span class="item">
           <ModalNovoProjeto inserirProjeto={this.inserirProjeto} />
           </span>
