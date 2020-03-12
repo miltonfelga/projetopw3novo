@@ -1,72 +1,61 @@
 import React, { Component } from "react";
+import api from '../api';
 
 class CardProjeto extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      likes:0
+      likes: 0
     }
     this.addLike = this.addLike.bind(this);
   }
 
-  componentDidMount(){
-      this.setState({likes:this.props.likes})
+  componentDidMount() {
+    this.setState({ likes: this.props.likes })
   }
 
-  addLike(){
-    let novo_likes = parseInt(this.state.likes +1);
-    this.setState({likes: novo_likes})
+  addLike() {
+    let novo_likes = parseInt(this.state.likes + 1);
+    api.put(`projetos/{$this.props.id}`, JSON.stringify({ likes: novo_likes }))
+      .then(function () {
+        this.setState({ likes: novo_likes })
+      })
 
-    fetch(
-      "http://localhost:8080/api/projetos/" + this.props.id,
-          {
-              method: 'PUT',
-              headers: {"Content-type": "application/json"},
-              body: JSON.stringify({likes: novo_likes}) 
-          }
-      )
-      .then(result => result.json())
-      .then(function(result){
-          this.setState({ likes: result.likes });
-      }.bind(this)
-  )
-
-  
   }
 
-render(){
-    return(
+  render() {
+    return (
       <>
         <div class="column">
-        <div class="ui card">
-          <div class="image">
-            <img src="https://vandal-us.s3.amazonaws.com/spree/products/46698/print/open-uri20181203-14-pqacts.jpg" />
-          </div>
-          <div class="content">
-            <div class="header"> {this.props.nome} </div>
-            <div class="meta">
-              <span class="date">{this.props.usuario}</span>
+          <div class="ui card">
+            <div class="image">
+              <img src="https://vandal-us.s3.amazonaws.com/spree/products/46698/print/open-uri20181203-14-pqacts.jpg" />
             </div>
-            <div class="description">
-              {this.props.descricao}
+            <div class="content">
+              <div class="header"> {this.props.nome} </div>
+              <div class="meta">
+                <span class="date">{this.props.usuario}</span>
+              </div>
+              <div class="description">
+                {this.props.descricao}
+              </div>
             </div>
-          </div>
 
-          <div classname="content">
-            <span>
-              <i aria-hidden="true" className="chat icon"></i>10 comentários
+            <div classname="content">
+              <span>
+                <i aria-hidden="true" className="chat icon"></i>10 comentários
             </span>
-            <span href="/" className="right floated botao-like" onClick={this.addLike}>
-              <i aria-hidden="true" className="heart icon"></i>{this.state.likes} likes
+              <span href="/" className="right floated botao-like" onClick={this.addLike}>
+                <i aria-hidden="true" className="heart icon"></i>{this.state.likes} likes
             </span>
+            </div>
           </div>
         </div>
-      </div>
       </>
     )
 
-}
+  }
 
 }
 
